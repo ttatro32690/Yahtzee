@@ -1,12 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="angularGamesApp">
   <head>
     <meta charset="UTF-8">
     <title>Angular Games</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/angular/angular.min.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        
+        <script src="/app/services/models/dice.js"></script>
+        <script src="/app/services/models/game.js"></script>
+        <script src="/app/services/models/scoresheet.js"></script>
+        
+        <script src="/app/app.js"></script>
+        
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    	<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="/assets/css/dice-1.0.min.css" rel="stylesheet">
+    	<link href="/assets/css/index.css" type="text/css" rel="stylesheet">
   </head>
-  <body>
+  <body ng-controller="mainController">
       
-  
+      <div class="container-fluid">
+        <div class="jumbotron">
+          <h3>Welcome to Yahtzee</h3>
+        </div>
+      </div>
+      
+      <div ng-show="game.isGameOver()" class="container">
+        <div class="row">
+          <h3 class="text-center">{{game.warning}}</h3>
+          <button ng-click="newGame()" type="button" class="btn btn-default btn-lg btn-block">New Game</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <score-sheet sheet="game.players[0]" dice-array="game.diceArray"></score-sheet>
+          </div>
+          <div class="col-md-6">
+            <score-sheet sheet="game.players[1]" dice-array="game.diceArray"></score-sheet>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6">
+                <score-sheet sheet="game.playerTurn" dice-array="game.diceArray"></score-sheet>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <ol class="breadcrumb text-center">
+                    <li>{{game.players[0].playerName}} Score: {{game.players[0].grandTotal()}}</li>
+                    <li>{{game.players[1].playerName}} Score: {{game.players[1].grandTotal()}}</li>
+                  </ol>
+                </div>
+                  <ol class="breadcrumb text-center">
+                    <li>Players: {{game.totalPlayers()}}</li>
+                    <li>Player's Turn: {{game.playerTurn.playerName}}</li>
+                    <li>Turns Left: {{game.turns}}</li>
+                    <li>Rolls Left: {{game.rolls}}</li>
+                  </ol>
+                  <div class="jumbotron">
+                      <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-offset-1">
+                            <div class="col-md-2 text-center" ng-repeat="dice in game.diceArray track by $index">
+                              <span class="dice dice-{{dice.value}}" ng-class="{border: dice.selected}" ng-click="selectDice($index)"></span>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <h3 class="text-center">{{game.warning}}</h3>
+                            <h3 class="text-center">{{game.message}}</h3>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <button ng-show="rollCondition()" ng-click="roll()" type="button" class="btn btn-primary btn-lg btn-block">Roll</button>
+                      <button ng-show="endTurnCondition()" ng-click="endTurn()" type="button" class="btn btn-default btn-lg btn-block">End Turn</button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
   </body>
 </html>

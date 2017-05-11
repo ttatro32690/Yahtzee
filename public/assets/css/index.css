@@ -1,0 +1,15 @@
+.border{
+    border: 2px solid black;
+}
+
+.warning{
+     font-weight: bold;
+}
+
+.dice{
+    display: inline-block;
+    min-height: 4em;
+    padding: 2em;
+    background-size: 4em;
+    background-repeat: no-repeat;  
+}

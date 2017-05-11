@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">View Score</button>
+          </span>
+          <input type="text" class="form-control" placeholder="Player 1 Name" ng-model="player1.playerName" value={{player1.playerName}}>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-btn">
+            {{player2.grandTotal()}}
+          </span>
+          <input type="text" class="form-control" placeholder="Player 2 Name" ng-model="player2.playerName" value={{player2.playerName}}>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<table class="table table-border table-condensed table-hover">
+    <tr>
+        <th><h2>{{sheet.playerName}}</h2></th>
+        <th></th>
+    </tr>
+    <tr>
+        <th class="success">Upper Section</th>
+        <th class="success"></th>
+    </tr>
+    <tr selection="sheet.selection" score="sheet['aces']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['twos']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['threes']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['fours']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['fives']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['sixes']" dice-array="diceArray"></tr>
+    <tr>
+        <td class="success">Total</td>
+        <!--<td>{{sheet}}</td>-->
+        <td class="success">{{sheet.upperScore()}}</td>
+    </tr>
+    <tr>
+        <td class="success">Bonus(Upper Score is 63 or Over) </td>
+        <td class="success">{{sheet.bonusScore()}}</td>
+    </tr>
+    <th class="success">Lower Section</th>
+    <th class="success">Score</th>
+    <tr selection="sheet.selection" score="sheet['threeOfKind']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['fourOfKind']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['fullHouse']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['smallStraight']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['largeStraight']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['chance']" dice-array="diceArray"></tr>
+    <tr selection="sheet.selection" score="sheet['yahtzee']" dice-array="diceArray"></tr>
+    <tr>
+        <th class="success">Lower Section Total</th>
+        <th class="success">{{sheet.lowerTotal()}}</th>
+    </tr>
+    <tr>
+    <th class="success">Upper Section Total</th>
+    <th class="success">{{sheet.upperTotal()}}</th>
+    </tr>
+    <tr>
+        <th class="success">Grand Total</th>
+        <th class="success">{{sheet.grandTotal()}}</th>
+    </tr>
+</table>
