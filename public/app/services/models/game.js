@@ -12,16 +12,8 @@ var Game = function(players, player){
     this.warning = "";
 };
 
-Game.prototype.initializeDiceArray = function(){
-        var diceArray = [];
-        for(var i = 0; i < 5; i++){
-            diceArray.push(new Dice(6));
-        }
-        return diceArray;
-};
-
-Game.prototype.totalPlayers = function(){
-    return this.players.length;
+Game.prototype.getPlayers = function(){
+    return this.players;
 };
 
 Game.prototype.setPlayerTurn = function(){
@@ -31,6 +23,54 @@ Game.prototype.setPlayerTurn = function(){
     } else {
         this.playerTurn = this.players[index+1];
     }
+};
+
+Game.prototype.getPlayerTurn = function(){
+    return this.playerTurn;
+};
+
+Game.prototype.getTurns = function(){
+    return this.turns;
+};
+
+Game.prototype.getRolls = function(){
+    return this.rolls;
+};
+
+Game.prototype.setDiceArray = function(){
+    //
+};
+
+Game.prototype.initializeDiceArray = function(){
+        var diceArray = [];
+        for(var i = 0; i < 5; i++){
+            diceArray.push(new Dice(6));
+        }
+        return diceArray;
+};
+
+Game.prototype.getDiceArray = function(){
+    return this.diceArray;
+};
+
+Game.prototype.setMessage = function(message){
+    this.message = message;
+};
+
+Game.prototype.getMessage = function(){
+    return this.message;
+};
+
+Game.prototype.setWarning = function(warning){
+    this.warning = warning;
+};
+
+Game.prototype.getWarning = function(){
+    return this.warning;
+};
+
+Game.prototype.totalPlayers = function(){
+    return this.players.length;
 };
 
 Game.prototype.decrementTurn = function(){
@@ -43,10 +83,6 @@ Game.prototype.decrementRolls = function(){
 
 Game.prototype.setRolls = function(){
     this.rolls = 3;
-};
-
-Game.prototype.setWarning = function(string){
-    this.warning = string;
 };
 
 Game.prototype.isTurnOver = function(){

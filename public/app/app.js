@@ -38,8 +38,8 @@ app.controller('mainController', ['$scope', function($scope){
     $scope.initializeGame = function(){
 
         $scope.players = [];
-        $scope.player1 = new Scoresheet('Player 1');
-        $scope.player2 = new Scoresheet('Player 2');
+        $scope.player1 = new Scoresheet("Player 1");
+        $scope.player2 = new Scoresheet("Player 2");
         
         $scope.players.push($scope.player1);
         $scope.players.push($scope.player2);

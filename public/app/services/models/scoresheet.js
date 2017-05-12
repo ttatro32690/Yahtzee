@@ -18,8 +18,8 @@ var Scoresheet = function(playerName){
     this.threeOfKind = new Score('Three of a Kind', 'total', 0, "sameValues");
     this.fourOfKind = new Score('Four of a Kind', 'total', 0, "sameValues");
     this.fullHouse = new Score('Full House', 25, 0, "fullHouse");
-    this.smallStraight = new Score('Small Straight', 30, 0, "inSequence");
-    this.largeStraight = new Score('Large Straight', 40, 0, "inSequence");
+    this.smallStraight = new Score('Small Straight', 30, 0, "inFourSequence");
+    this.largeStraight = new Score('Large Straight', 40, 0, "inFiveSequence");
     this.chance = new Score('Chance', 'total', 0, "chance");
     this.yahtzee = new Score('Yahtzee', 50, 0, "sameValues", 0);
     
@@ -185,30 +185,51 @@ Score.prototype.fullHouse = function(diceArray){
     }
 };
 
-Score.prototype.inSequence = function(diceArray){
+Score.prototype.inFourSequence = function(diceArray){
     
-    var sequence = this.getSequenceNumber();
+    var beginArray = [];
+    var endArray = [];
+    diceArray.forEach(function(dice, index){
+        if(index > 0){
+            beginArray.push(dice.value);
+        }
+        if(index < diceArray.length-1){
+            endArray.push(dice.value);
+        }
+    });
+    
+    var isSequenced = function(){
+        var combinations = [[1,2,3,4],[2,3,4,5],[3,4,5,6]];
+
+        return combinations.filter(function(value, index, array){
+            return value.toString().includes(beginArray.sort().toString()) || value.toString().includes(endArray.sort().toString());
+        });
+    };
+    
+    if(isSequenced().length > 0){
+        return this.value;
+    } else {
+        return 0;
+    }
+    
+};
+
+Score.prototype.inFiveSequence = function(diceArray){
     
     var valueArray = [];
-    diceArray.forEach(function(dice){
+    diceArray.forEach(function(dice, index){
         valueArray.push(dice.value);
     });
     
     var isSequenced = function(){
-        var prevValue = 0;
-        return valueArray.sort().filter(function(value, index, array){
-            if(prevValue + 1 === value){
-                prevValue = value;
-                return true;
-            } else {
-                prevValue = value;
-                return false;
-            }
-            
+        var combinations = [[1,2,3,4,5],[2,3,4,5,6]];
+
+        return combinations.filter(function(value, index, array){
+            return value.toString().includes(valueArray.sort().toString());
         });
     };
-    
-    if(isSequenced().length >= sequence){
+
+    if(isSequenced().length > 0){
         return this.value;
     } else {
         return 0;

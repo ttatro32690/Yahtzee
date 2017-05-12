@@ -1,5 +1,5 @@
 <tr ng-class="{warning: selection.name == score.name, danger: score.available === false, info: score.scoreFunction(diceArray)}">
     <td>{{score.name}}</td>
-    <td ng-show="{{!score.available}}">{{score.score}}</td>
-    <td ng-show="{{score.available}}">{{score.scoreFunction(diceArray)}}</td>
+    <td ng-if="!score.available">{{score.score}}</td>
+    <td ng-if="score.available">{{score.scoreFunction(diceArray)}}</td>
 </tr>
