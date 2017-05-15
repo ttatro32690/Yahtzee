@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <title>Angular Games</title>
 
+        <!--Primary Resources-->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/angular/angular.min.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         
+        <!--Models-->
         <script src="/app/services/models/dice.js"></script>
         <script src="/app/services/models/game.js"></script>
         <script src="/app/services/models/scoresheet.js"></script>
         
+        <!--Application-->
         <script src="/app/app.js"></script>
+        
+        <!--Directives-->
+        <script src="/app/directives/newgame.js"></script>
+        <script src="/app/directives/score.js"></script>
+        <script src="/app/directives/scoresheet.js"></script>
         
       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     	<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +50,7 @@
         </div>
       </div>
       
-      <div class="container">
+      <div ng-show="!game.isGameOver()" class="container">
           <div class="row">
               <div class="col-md-6">
                 <score-sheet sheet="game.playerTurn" dice-array="game.diceArray"></score-sheet>

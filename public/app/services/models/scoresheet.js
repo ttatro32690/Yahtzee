@@ -26,6 +26,12 @@ var Scoresheet = function(playerName){
 
 };
 
+Scoresheet.prototype.setScore = function(diceArray){
+        this.selection.setScore(diceArray);
+        this.available = false;
+        this.selection = "";
+};
+
 Scoresheet.prototype.upperScore = function(){
     var value = 0;
     
@@ -88,6 +94,10 @@ var Score = function(name, value, score, scoreFunction, selectable){
     this.available = true;
     this.scoreFunction = this[scoreFunction].bind(this);
     this.bonus = 0;
+};
+
+Score.prototype.setScore = function(){
+    this.score = this.scoreFunction();
 };
 
 Score.prototype.isSingleScoreValid = function(diceArray){
@@ -187,14 +197,11 @@ Score.prototype.fullHouse = function(diceArray){
 
 Score.prototype.inFourSequence = function(diceArray){
     
-    var beginArray = [];
-    var endArray = [];
+    var valueArray = [];
+    
     diceArray.forEach(function(dice, index){
-        if(index > 0){
-            beginArray.push(dice.value);
-        }
-        if(index < diceArray.length-1){
-            endArray.push(dice.value);
+        if(valueArray.indexOf(dice.value) === -1){
+            valueArray.push(dice.value);
         }
     });
     
@@ -202,7 +209,7 @@ Score.prototype.inFourSequence = function(diceArray){
         var combinations = [[1,2,3,4],[2,3,4,5],[3,4,5,6]];
 
         return combinations.filter(function(value, index, array){
-            return value.toString().includes(beginArray.sort().toString()) || value.toString().includes(endArray.sort().toString());
+            return valueArray.sort().toString().includes(value.sort().toString());
         });
     };
     

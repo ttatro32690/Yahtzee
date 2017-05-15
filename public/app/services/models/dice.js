@@ -3,7 +3,7 @@
 var Dice = function(sides){
     this.sides = sides;
     this.selected = false;
-    this.value = 1;
+    this.value = this.roll();
 };
 
 Dice.prototype.setSides = function(sides){

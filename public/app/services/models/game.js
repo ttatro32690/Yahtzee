@@ -101,20 +101,6 @@ Game.prototype.isGameOver = function(){
     }
 };
 
-Game.prototype.rollUnselected = function(){
-    for(var i = 0; i < 5; i++){
-        if(!this.diceArray[i].selected){
-            this.diceArray[i].value = this.diceArray[i].roll();
-        }   
-    }
-};
-
-Game.prototype.deselectDice = function(){
-    for(var i = 0; i < this.diceArray.length; i++){
-        this.diceArray[i].selected = false;
-    }
-};
-
 Game.prototype.endTurn = function(){
     if(this.playerTurn.selection){
         this.playerTurn.selection.score = this.playerTurn.selection.scoreFunction(this.diceArray);
@@ -122,6 +108,7 @@ Game.prototype.endTurn = function(){
         this.playerTurn.selection = "";
         this.decrementTurn();
         if(!this.isGameOver()){
+            // next turn?
             this.setPlayerTurn();
             this.setRolls();
             this.deselectDice();
@@ -144,4 +131,32 @@ Game.prototype.selectDice = function(index){
     } else {
         this.setWarning("Cannot Select Dice Before First Roll!");
     }
+};
+
+Game.prototype.deselectDice = function(){
+    for(var i = 0; i < this.diceArray.length; i++){
+        this.diceArray[i].setSelected(false);
+    }
+};
+
+Game.prototype.roll = function(){
+    this.setWarning("");
+    this.decrementRolls();
+    this.rollUnselected();
+};
+
+Game.prototype.rollUnselected = function(){
+    for(var i = 0; i < 5; i++){
+        if(!this.diceArray[i].selected){
+            this.diceArray[i] = new Dice(6);
+        }   
+    }
+};
+
+Game.prototype.endTurnCondition = function(){
+    return (!this.isGameOver() && this.rolls === 0) || (this.playerTurn.selection && this.rolls < 3);
+};
+
+Game.prototype.rollCondition = function(){
+    return !this.isGameOver() && this.rolls > 0;
 };
