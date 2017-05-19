@@ -13,6 +13,7 @@
         <script src="/app/services/models/dice.js"></script>
         <script src="/app/services/models/game.js"></script>
         <script src="/app/services/models/scoresheet.js"></script>
+        <script src="/app/services/models/score.js"></script>
         
         <!--Application-->
         <script src="/app/app.js"></script>
@@ -26,6 +27,7 @@
     	<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     	<link href="/assets/css/dice-1.0.min.css" rel="stylesheet">
     	<link href="/assets/css/index.css" type="text/css" rel="stylesheet">
+    	
   </head>
   <body ng-controller="mainController">
       
@@ -33,7 +35,7 @@
         <div class="jumbotron">
           <h3>Welcome to Yahtzee</h3>
         </div>
-      </div>
+      </div> 
       
       <div ng-show="game.isGameOver()" class="container">
         <div class="row">
@@ -85,8 +87,8 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                      <button ng-show="rollCondition()" ng-click="roll()" type="button" class="btn btn-primary btn-lg btn-block">Roll</button>
-                      <button ng-show="endTurnCondition()" ng-click="endTurn()" type="button" class="btn btn-default btn-lg btn-block">End Turn</button>
+                      <button ng-show="game.rollCondition()" ng-click="roll()" type="button" class="btn btn-primary btn-lg btn-block">Roll</button>
+                      <button ng-show="game.endTurnCondition()" ng-click="endTurn()" type="button" class="btn btn-default btn-lg btn-block">End Turn</button>
                     </div>
                   </div>
               </div>

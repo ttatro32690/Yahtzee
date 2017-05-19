@@ -11,5 +11,9 @@
   "dependencies": {
     "bower": "^1.8.0",
     "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "angular-jsdoc": "^1.5.0",
+    "jsdoc": "^3.4.3"
   }
 }
