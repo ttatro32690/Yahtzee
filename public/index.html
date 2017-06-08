@@ -54,6 +54,18 @@
       
       <div ng-show="!game.isGameOver()" class="container">
           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Player 1" ng-model="game.players[0].playerName">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Player 2" ng-model="game.players[1].playerName">
+              </div>
+            </div>
+          </div>
+            <div class="row">
               <div class="col-md-6">
                 <score-sheet sheet="game.playerTurn" dice-array="game.diceArray"></score-sheet>
               </div>
@@ -68,7 +80,7 @@
                     <li>Players: {{game.totalPlayers()}}</li>
                     <li>Player's Turn: {{game.playerTurn.playerName}}</li>
                     <li>Turns Left: {{game.turns}}</li>
-                    <li>Rolls Left: {{game.rolls}}</li>
+                    <li><h1>Rolls Left: {{game.rolls}}</h1></li>
                   </ol>
                   <div class="jumbotron">
                       <div class="container-fluid">
